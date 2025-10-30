@@ -256,30 +256,9 @@ layout = dmc.Container(
             children=[
                 html.H2("¿Listo para empezar?", style={"color": "#2d6a4f", "marginBottom": "20px"}),
                 html.P(
-                    "Selecciona el método de descarga que mejor se adapte a tus necesidades",
+                    "Selecciona el método de descarga que mejor se adapte a tus necesidades en las pestañas de arriba",
                     style={"fontSize": "16px", "color": "#666", "marginBottom": "30px"}
                 ),
-                dmc.Group(
-                    justify="center",
-                    gap="md",
-                    children=[
-                        dmc.Button(
-                            "Búsqueda por códigos SIGPAC",
-                            size="lg",
-                            color="green",
-                        ),
-                        dmc.Button(
-                            "Búsqueda por área en Mapa",
-                            size="lg",
-                            color="blue",
-                        ),
-                        dmc.Button(
-                            "Filtro y Descarga ATOM",
-                            size="lg",
-                            color="teal",
-                        ),
-                    ]
-                )
             ]
         )
     ]
