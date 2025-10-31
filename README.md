@@ -62,17 +62,22 @@ This command:
 - Installs all dependencies specified in `pyproject.toml`
 - Sets up the project ready to use
 
-### 4. Activate the virtual environment
+### 5. Run your code
 
-**On Linux/macOS:**
+**From the terminal:**
 ```bash
-source .venv/bin/activate
+uv run python main.py
 ```
+This will start the Dash development server.
+By default, the app will be available at:
+http://127.0.0.1:8050
 
-**On Windows:**
-```bash
-.venv\Scripts\activate
-```
+**From your code editor (VSCode, PyCharm, etc.):**
+1. Open the main.py file.
+2. Make sure your Python interpreter is set to the project virtual environment (.venv).
+3. Click the ▶️ Run / Play button to start the app.
+
+The development server will start automatically, and you can open the app in your browser.
 
 ## Contributing
 
