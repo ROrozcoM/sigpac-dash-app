@@ -84,5 +84,13 @@ coverage.xml
 # OS
 Thumbs.db
 
-#uv
+# Archivos compilados de Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Archivos de bloqueo locales
 uv.lock
+poetry.lock
+Pipfile.lock

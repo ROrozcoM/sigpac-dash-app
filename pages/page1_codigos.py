@@ -1,5 +1,5 @@
 """
-Página 1: Descarga por Códigos SIGPAC
+Página 1: Descarga por Códigos SIGPAC - RESPONSIVE
 Todo en un archivo
 """
 import dash
@@ -16,16 +16,23 @@ from utils.geo_utils import gdf_to_geojson, calcular_centro_zoom, exportar_geopa
 dash.register_page(__name__, path="/", name="Códigos SIGPAC")
 
 # =============================================================================
-# LAYOUT
+# LAYOUT RESPONSIVE
 # =============================================================================
 
 layout = dmc.Container(
     size="xl",
     children=[
-        html.H1("Descarga por Códigos SIGPAC"),
-        html.P("Introduce códigos en formato PR:MU:PO:PA:RE (uno por línea)"),
+        html.H1(
+            "Descarga por Códigos SIGPAC",
+            style={"fontSize": "clamp(24px, 5vw, 32px)", "marginBottom": "10px"}
+        ),
+        html.P(
+            "Introduce códigos en formato PR:MU:PO:PA:RE (uno por línea)",
+            style={"fontSize": "clamp(14px, 2.5vw, 16px)", "marginBottom": "20px", "color": "#666"}
+        ),
         
         html.Div(
+            className="responsive-grid-layout",
             style={"display": "grid", "gridTemplateColumns": "1fr 2fr", "gap": "20px"},
             children=[
                 # Columna izquierda: Formulario
@@ -33,6 +40,7 @@ layout = dmc.Container(
                     p="md",
                     shadow="sm",
                     withBorder=True,
+                    className="formulario-panel",
                     children=[
                         dmc.Textarea(
                             id="input-codigos",
@@ -40,11 +48,13 @@ layout = dmc.Container(
                             placeholder="14:010:1:5:2\n14:010:1:5:3",
                             minRows=10,
                             autosize=True,
-                            mb="md"
+                            mb="md",
+                            className="textarea-codigos"
                         ),
                         
                         dmc.Group(
                             mb="md",
+                            className="button-group-responsive",
                             children=[
                                 dmc.Button("Ejemplo", id="btn-ej1", size="xs", variant="light"),
                                 dmc.Button("Limpiar", id="btn-limpiar", size="xs", color="red", variant="subtle"),
@@ -65,38 +75,43 @@ layout = dmc.Container(
                 ),
                 
                 # Columna derecha: Resultados
-                html.Div([
-                    html.Div(id="stats-cards", style={"marginBottom": "20px"}),
-                    dmc.Box(
-                        pos="relative",
-                        style={"minHeight": "500px"},
-                        children=[
-                            dmc.LoadingOverlay(
-                                visible=False,
-                                id="loading-overlay",
-                                zIndex=1000,
-                                loaderProps={
-                                    "variant": "custom",
-                                    "children": dmc.Image(
-                                        h=150,
-                                        radius="md",
-                                        src="/assets/pato.gif",
-                                    ),
-                                },
-                                overlayProps={"radius": "sm", "blur": 2}
-                            ),
-                            html.Div(id="mapa-resultados")
-                        ]
-                    ),
-                    html.Div(
-                        id="botones-descarga",
-                        style={"marginTop": "20px", "display": "none"},
-                        children=dmc.Group([
-                            dmc.Button("📦 GeoPackage", id="btn-gpkg", color="green"),
-                            dmc.Button("📁 Shapefile", id="btn-shp", color="blue"),
-                        ])
-                    )
-                ])
+                html.Div(
+                    className="resultados-panel",
+                    children=[
+                        html.Div(id="stats-cards", style={"marginBottom": "20px"}),
+                        dmc.Box(
+                            pos="relative",
+                            className="mapa-container",
+                            style={"minHeight": "500px"},
+                            children=[
+                                dmc.LoadingOverlay(
+                                    visible=False,
+                                    id="loading-overlay",
+                                    zIndex=1000,
+                                    loaderProps={
+                                        "variant": "custom",
+                                        "children": dmc.Image(
+                                            h=150,
+                                            radius="md",
+                                            src="/assets/pato.gif",
+                                        ),
+                                    },
+                                    overlayProps={"radius": "sm", "blur": 2}
+                                ),
+                                html.Div(id="mapa-resultados")
+                            ]
+                        ),
+                        html.Div(
+                            id="botones-descarga",
+                            className="botones-descarga-responsive",
+                            style={"marginTop": "20px", "display": "none"},
+                            children=dmc.Group([
+                                dmc.Button("📦 GeoPackage", id="btn-gpkg", color="green"),
+                                dmc.Button("📁 Shapefile", id="btn-shp", color="blue"),
+                            ])
+                        )
+                    ]
+                )
             ]
         ),
         
@@ -110,7 +125,7 @@ layout = dmc.Container(
 
 
 # =============================================================================
-# CALLBACKS
+# CALLBACKS (Sin cambios)
 # =============================================================================
 
 @callback(
@@ -193,21 +208,22 @@ def mostrar_resultados(gdf_json):
     gdf = gpd.read_file(gdf_json)
     stats = calcular_estadisticas(gdf)
     
-    # Stats cards
+    # Stats cards con clase responsive
     stats_cards = html.Div(
+        className="stats-grid-responsive",
         style={"display": "grid", "gridTemplateColumns": "1fr 1fr 1fr", "gap": "10px"},
         children=[
             dmc.Paper(p="md", withBorder=True, children=[
                 html.Div("Parcelas", style={"fontSize": "12px", "color": "#666"}),
-                html.Div(str(stats['num_parcelas']), style={"fontSize": "24px", "fontWeight": "bold", "color": "green"})
+                html.Div(str(stats['num_parcelas']), style={"fontSize": "clamp(20px, 4vw, 24px)", "fontWeight": "bold", "color": "green"})
             ]),
             dmc.Paper(p="md", withBorder=True, children=[
                 html.Div("Superficie Total", style={"fontSize": "12px", "color": "#666"}),
-                html.Div(f"{stats['superficie_total']:.2f} ha", style={"fontSize": "24px", "fontWeight": "bold", "color": "blue"})
+                html.Div(f"{stats['superficie_total']:.2f} ha", style={"fontSize": "clamp(20px, 4vw, 24px)", "fontWeight": "bold", "color": "blue"})
             ]),
             dmc.Paper(p="md", withBorder=True, children=[
                 html.Div("Media", style={"fontSize": "12px", "color": "#666"}),
-                html.Div(f"{stats['superficie_media']:.2f} ha", style={"fontSize": "24px", "fontWeight": "bold", "color": "orange"})
+                html.Div(f"{stats['superficie_media']:.2f} ha", style={"fontSize": "clamp(20px, 4vw, 24px)", "fontWeight": "bold", "color": "orange"})
             ]),
         ]
     )
@@ -219,6 +235,7 @@ def mostrar_resultados(gdf_json):
     mapa = dl.Map(
         center=centro,
         zoom=zoom,
+        className="leaflet-map-responsive",
         style={"width": "100%", "height": "500px"},
         children=[
             # Capa base satelital

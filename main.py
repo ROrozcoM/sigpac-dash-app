@@ -1,5 +1,5 @@
 """
-SIGPAC Dash App
+SIGPAC Dash App - Responsive Version
 """
 import dash
 from dash import Dash, html, dcc
@@ -14,7 +14,7 @@ app = Dash(
     title="SIGPAC Parcelas"
 )
 
-# Layout simple
+# Layout responsive
 app.layout = dmc.MantineProvider(
     html.Div(
         style={
@@ -23,37 +23,62 @@ app.layout = dmc.MantineProvider(
             "flexDirection": "column"
         },
         children=[
-            # Header mejorado
+            # Header responsive
             html.Div(
                 style={
                     "backgroundColor": "#2d6a4f",
-                    "padding": "20px 40px",
+                    "padding": "15px 20px",
                     "color": "white",
                     "boxShadow": "0 2px 8px rgba(0,0,0,0.1)"
                 },
+                className="header-container",
                 children=[
                     html.Div(
                         style={
                             "display": "flex",
-                            "alignItems": "center",
-                            "justifyContent": "space-between",
+                            "flexDirection": "column",
+                            "gap": "15px",
                             "maxWidth": "1400px",
                             "margin": "0 auto"
                         },
+                        className="header-content",
                         children=[
-                            # Logo clickeable
+                            # Logo (siempre visible)
                             dcc.Link(
                                 href="/home",
-                                style={"textDecoration": "none", "color": "white", "display": "flex", "alignItems": "center"},
+                                style={
+                                    "textDecoration": "none",
+                                    "color": "white",
+                                    "display": "flex",
+                                    "alignItems": "center",
+                                    "justifyContent": "center"
+                                },
+                                className="logo-link",
                                 children=[
-                                    html.Span(DashIconify(icon="mdi:hexagon-multiple-outline", width=52, color="#aeb237",
-                                                        style={"verticalAlign": "middle", "marginRight": "8px"}), style={"fontSize": "24px"}),
-                                    html.H2("SIGPAC Parcelas", style={"margin": "0", "fontWeight": "700", "fontSize": "24px"})
+                                    html.Span(
+                                        DashIconify(icon="mdi:hexagon-multiple-outline", width=40, color="#aeb237"),
+                                        style={"marginRight": "8px"}
+                                    ),
+                                    html.H2(
+                                        "SIGPAC Parcelas",
+                                        style={
+                                            "margin": "0",
+                                            "fontWeight": "700",
+                                            "fontSize": "clamp(20px, 5vw, 24px)"
+                                        }
+                                    )
                                 ]
                             ),
-                            # Navegación
+                            # Navegación (se adapta en móvil)
                             html.Nav(
-                                style={"display": "flex", "gap": "8px", "alignItems": "center"},
+                                style={
+                                    "display": "flex",
+                                    "flexWrap": "wrap",
+                                    "gap": "8px",
+                                    "justifyContent": "center",
+                                    "alignItems": "center"
+                                },
+                                className="nav-container",
                                 children=[
                                     dcc.Link(
                                         "Inicio",
@@ -61,49 +86,61 @@ app.layout = dmc.MantineProvider(
                                         style={
                                             "color": "white",
                                             "textDecoration": "none",
-                                            "padding": "10px 20px",
+                                            "padding": "8px 16px",
                                             "borderRadius": "6px",
                                             "transition": "background-color 0.2s",
-                                            "fontWeight": "500"
+                                            "fontWeight": "500",
+                                            "fontSize": "clamp(13px, 2.5vw, 15px)",
+                                            "whiteSpace": "nowrap",
+                                            "textAlign": "center"
                                         },
                                         className="nav-link"
                                     ),
                                     dcc.Link(
-                                        "Descarga por códigos",
+                                        "Códigos",
                                         href="/",
                                         style={
                                             "color": "white",
                                             "textDecoration": "none",
-                                            "padding": "10px 20px",
+                                            "padding": "8px 16px",
                                             "borderRadius": "6px",
                                             "transition": "background-color 0.2s",
-                                            "fontWeight": "500"
+                                            "fontWeight": "500",
+                                            "fontSize": "clamp(13px, 2.5vw, 15px)",
+                                            "whiteSpace": "nowrap",
+                                            "textAlign": "center"
                                         },
                                         className="nav-link"
                                     ),
                                     dcc.Link(
-                                        "Descargar por área en mapa",
+                                        "Mapa",
                                         href="/bbox",
                                         style={
                                             "color": "white",
                                             "textDecoration": "none",
-                                            "padding": "10px 20px",
+                                            "padding": "8px 16px",
                                             "borderRadius": "6px",
                                             "transition": "background-color 0.2s",
-                                            "fontWeight": "500"
+                                            "fontWeight": "500",
+                                            "fontSize": "clamp(13px, 2.5vw, 15px)",
+                                            "whiteSpace": "nowrap",
+                                            "textAlign": "center"
                                         },
                                         className="nav-link"
                                     ),
                                     dcc.Link(
-                                        "Descarga y filtro ATOM",
+                                        "ATOM",
                                         href="/atom",
                                         style={
                                             "color": "white",
                                             "textDecoration": "none",
-                                            "padding": "10px 20px",
+                                            "padding": "8px 16px",
                                             "borderRadius": "6px",
                                             "transition": "background-color 0.2s",
-                                            "fontWeight": "500"
+                                            "fontWeight": "500",
+                                            "fontSize": "clamp(13px, 2.5vw, 15px)",
+                                            "whiteSpace": "nowrap",
+                                            "textAlign": "center"
                                         },
                                         className="nav-link"
                                     ),
@@ -122,37 +159,52 @@ app.layout = dmc.MantineProvider(
                         dash.page_container,
                         size="xl",
                         px="md",
-                        pt="xl"
+                        pt="xl",
+                        className="main-container"
                     )
                 ]
             ),
             
-            # Footer profesional (siempre abajo)
+            # Footer responsive
             html.Div(
                 style={
                     "textAlign": "center",
-                    "padding": "30px 20px",
+                    "padding": "clamp(20px, 4vw, 30px) 20px",
                     "borderTop": "1px solid #e0e0e0",
                     "backgroundColor": "#f8f9fa"
                 },
+                className="footer-container",
                 children=[
                     html.Div(
                         style={"marginBottom": "10px"},
                         children=[
-                            html.Span(DashIconify(icon="mdi:hexagon-multiple-outline", width=52, color="#aeb237",
-                                                        style={"verticalAlign": "middle", "marginRight": "8px"}), style={"fontSize": "24px"}),
+                            html.Span(
+                                DashIconify(icon="mdi:hexagon-multiple-outline", width=40, color="#aeb237"),
+                                style={"marginRight": "8px"}
+                            ),
                             html.Span(
                                 "SIGPAC Parcelas",
-                                style={"fontSize": "18px", "fontWeight": "600", "color": "#2d6a4f"}
+                                style={
+                                    "fontSize": "clamp(16px, 3vw, 18px)",
+                                    "fontWeight": "600",
+                                    "color": "#2d6a4f"
+                                }
                             )
                         ]
                     ),
                     html.Div(
-                        style={"color": "#666", "fontSize": "14px", "marginBottom": "8px"},
+                        style={
+                            "color": "#666",
+                            "fontSize": "clamp(12px, 2.5vw, 14px)",
+                            "marginBottom": "8px"
+                        },
                         children="Descarga y visualización de datos agrícolas SIGPAC"
                     ),
                     html.Div(
-                        style={"color": "#999", "fontSize": "13px"},
+                        style={
+                            "color": "#999",
+                            "fontSize": "clamp(11px, 2vw, 13px)"
+                        },
                         children=[
                             "Desarrollado por ",
                             html.Span(
@@ -173,6 +225,9 @@ server = app.server
 
 import os
 
+#if __name__ == "__main__":
+    #port = int(os.environ.get("PORT", 8040))
+    #app.run(host="0.0.0.0", port=port, debug=False)
+
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 8050))
-    app.run(host="0.0.0.0", port=port, debug=False)
+    app.run(debug=True, port=8040)

@@ -1,5 +1,5 @@
 """
-Página 3: Descarga ATOM
+Página 3: Descarga ATOM - RESPONSIVE
 Todo en un archivo
 """
 import dash
@@ -82,16 +82,23 @@ USOS = [
 ]
 
 # =============================================================================
-# LAYOUT
+# LAYOUT RESPONSIVE
 # =============================================================================
 
 layout = dmc.Container(
     size="xl",
     children=[
-        html.H1("Descarga ATOM Oficial"),
-        html.P("Descarga datos oficiales de FEGA por provincia y municipio"),
+        html.H1(
+            "Descarga ATOM Oficial",
+            style={"fontSize": "clamp(24px, 5vw, 32px)", "marginBottom": "10px"}
+        ),
+        html.P(
+            "Descarga datos oficiales de FEGA por provincia y municipio",
+            style={"fontSize": "clamp(14px, 2.5vw, 16px)", "marginBottom": "20px", "color": "#666"}
+        ),
         
         html.Div(
+            className="atom-layout-responsive",
             style={"display": "grid", "gridTemplateColumns": "1fr 2fr", "gap": "20px"},
             children=[
                 # Columna izquierda: Formulario
@@ -99,6 +106,7 @@ layout = dmc.Container(
                     p="md",
                     shadow="sm",
                     withBorder=True,
+                    className="atom-formulario-panel",
                     children=[
                         dmc.Select(
                             id="select-provincia",
@@ -169,38 +177,43 @@ layout = dmc.Container(
                 ),
                 
                 # Columna derecha: Resultados
-                html.Div([
-                    html.Div(id="stats-atom", style={"marginBottom": "20px"}),
-                    dmc.Box(
-                        pos="relative",
-                        style={"minHeight": "500px"},
-                        children=[
-                            dmc.LoadingOverlay(
-                                visible=False,
-                                id="loading-overlay-atom",
-                                zIndex=1000,
-                                loaderProps={
-                                    "variant": "custom",
-                                    "children": dmc.Image(
-                                        h=150,
-                                        radius="md",
-                                        src="/assets/pato.gif",
-                                    ),
-                                },
-                                overlayProps={"radius": "sm", "blur": 2}
-                            ),
-                            html.Div(id="mapa-atom")
-                        ]
-                    ),
-                    html.Div(
-                        id="botones-descarga-atom",
-                        style={"marginTop": "20px", "display": "none"},
-                        children=dmc.Group([
-                            dmc.Button("📦 GeoPackage", id="btn-gpkg-atom", color="green"),
-                            dmc.Button("📁 Shapefile", id="btn-shp-atom", color="blue"),
-                        ])
-                    )
-                ])
+                html.Div(
+                    className="atom-resultados-panel",
+                    children=[
+                        html.Div(id="stats-atom", style={"marginBottom": "20px"}),
+                        dmc.Box(
+                            pos="relative",
+                            className="atom-mapa-container",
+                            style={"minHeight": "500px"},
+                            children=[
+                                dmc.LoadingOverlay(
+                                    visible=False,
+                                    id="loading-overlay-atom",
+                                    zIndex=1000,
+                                    loaderProps={
+                                        "variant": "custom",
+                                        "children": dmc.Image(
+                                            h=150,
+                                            radius="md",
+                                            src="/assets/pato.gif",
+                                        ),
+                                    },
+                                    overlayProps={"radius": "sm", "blur": 2}
+                                ),
+                                html.Div(id="mapa-atom")
+                            ]
+                        ),
+                        html.Div(
+                            id="botones-descarga-atom",
+                            className="atom-botones-descarga",
+                            style={"marginTop": "20px", "display": "none"},
+                            children=dmc.Group([
+                                dmc.Button("📦 GeoPackage", id="btn-gpkg-atom", color="green"),
+                                dmc.Button("📁 Shapefile", id="btn-shp-atom", color="blue"),
+                            ])
+                        )
+                    ]
+                )
             ]
         ),
         
@@ -214,7 +227,7 @@ layout = dmc.Container(
 
 
 # =============================================================================
-# CALLBACKS
+# CALLBACKS (Sin cambios en la lógica)
 # =============================================================================
 
 @callback(
@@ -328,21 +341,22 @@ def mostrar_resultados_atom(gdf_json):
         sup_total = 0
         sup_media = 0
     
-    # Stats cards
+    # Stats cards con clase responsive
     stats_cards = html.Div(
+        className="atom-stats-grid",
         style={"display": "grid", "gridTemplateColumns": "1fr 1fr 1fr", "gap": "10px"},
         children=[
             dmc.Paper(p="md", withBorder=True, children=[
                 html.Div("Recintos", style={"fontSize": "12px", "color": "#666"}),
-                html.Div(str(num_parcelas), style={"fontSize": "24px", "fontWeight": "bold", "color": "green"})
+                html.Div(str(num_parcelas), style={"fontSize": "clamp(20px, 4vw, 24px)", "fontWeight": "bold", "color": "green"})
             ]),
             dmc.Paper(p="md", withBorder=True, children=[
                 html.Div("Superficie Total", style={"fontSize": "12px", "color": "#666"}),
-                html.Div(f"{sup_total:.2f} ha", style={"fontSize": "24px", "fontWeight": "bold", "color": "blue"})
+                html.Div(f"{sup_total:.2f} ha", style={"fontSize": "clamp(20px, 4vw, 24px)", "fontWeight": "bold", "color": "blue"})
             ]),
             dmc.Paper(p="md", withBorder=True, children=[
                 html.Div("Media", style={"fontSize": "12px", "color": "#666"}),
-                html.Div(f"{sup_media:.2f} ha", style={"fontSize": "24px", "fontWeight": "bold", "color": "orange"})
+                html.Div(f"{sup_media:.2f} ha", style={"fontSize": "clamp(20px, 4vw, 24px)", "fontWeight": "bold", "color": "orange"})
             ]),
         ]
     )
@@ -354,6 +368,7 @@ def mostrar_resultados_atom(gdf_json):
     mapa = dl.Map(
         center=centro,
         zoom=zoom,
+        className="atom-mapa-responsive",
         style={"width": "100%", "height": "500px"},
         children=[
             # Capa base satelital

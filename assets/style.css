@@ -10,17 +10,735 @@ body {
     background-color: rgba(255, 255, 255, 0.15) !important;
 }
 
-/* Responsive grid */
-@media (max-width: 768px) {
-    [style*="gridTemplateColumns"] {
-        grid-template-columns: 1fr !important;
-    }
-}
-
 /* Parcelas seleccionadas en mapa */
 .leaflet-interactive[data-selected="true"] {
     fill: #00ff00 !important;
     fill-opacity: 0.7 !important;
     stroke: #ffff00 !important;
     stroke-width: 3 !important;
+}
+
+/* ============================================ */
+/* ESTILOS PARA POPUPS DE LEAFLET */
+/* ============================================ */
+
+/* Popup mejorado */
+.leaflet-popup-content-wrapper {
+    border-radius: 8px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+    padding: 0 !important;
+}
+
+.leaflet-popup-content {
+    margin: 12px 14px !important;
+    line-height: 1.6 !important;
+    font-size: 13px !important;
+    min-width: 200px !important;
+}
+
+.leaflet-popup-tip {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Botón de cerrar más grande y visible */
+.leaflet-popup-close-button {
+    font-size: 20px !important;
+    padding: 4px 8px !important;
+    color: #666 !important;
+    width: 24px !important;
+    height: 24px !important;
+    line-height: 20px !important;
+}
+
+.leaflet-popup-close-button:hover {
+    color: #d32f2f !important;
+    background-color: rgba(255, 0, 0, 0.1) !important;
+    border-radius: 4px;
+}
+
+/* Prevenir que el popup se cierre automáticamente */
+.leaflet-container a.leaflet-popup-close-button {
+    padding: 8px !important;
+    font-size: 24px !important;
+    font-weight: bold !important;
+}
+
+/* Hacer el popup más visible y persistente */
+.leaflet-popup {
+    margin-bottom: 20px !important;
+}
+
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+    pointer-events: auto !important;
+}
+
+/* Responsive popup en móvil */
+@media (max-width: 768px) {
+    .leaflet-popup-content-wrapper {
+        max-width: 250px !important;
+    }
+    
+    .leaflet-popup-content {
+        font-size: 12px !important;
+        margin: 10px 12px !important;
+    }
+    
+    /* Popups más compactos en móvil */
+    .leaflet-popup {
+        margin-bottom: 30px !important;
+    }
+    
+    .leaflet-popup-close-button {
+        font-size: 22px !important;
+        padding: 6px !important;
+    }
+}
+
+/* ============================================ */
+/* RESPONSIVE LAYOUT */
+/* ============================================ */
+
+/* Desktop - navegación horizontal lado a lado con logo */
+@media (min-width: 769px) {
+    .header-content {
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+    }
+    
+    .logo-link {
+        justify-content: flex-start !important;
+    }
+    
+    .nav-container {
+        justify-content: flex-end !important;
+    }
+    
+    .nav-link {
+        font-size: 15px !important;
+    }
+}
+
+/* Tablet y móvil - navegación en columna */
+@media (max-width: 768px) {
+    .header-container {
+        padding: 12px 15px !important;
+    }
+    
+    .header-content {
+        flex-direction: column !important;
+        gap: 12px !important;
+    }
+    
+    .logo-link {
+        justify-content: center !important;
+    }
+    
+    .nav-container {
+        width: 100%;
+        justify-content: center !important;
+        gap: 6px !important;
+    }
+    
+    .nav-link {
+        flex: 1 1 auto;
+        min-width: 70px;
+        font-size: 13px !important;
+        padding: 8px 12px !important;
+    }
+    
+    /* Ajustar contenedor principal */
+    .main-container {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+    
+    /* Ajustar grid responsive */
+    [style*="gridTemplateColumns"] {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+/* Móvil muy pequeño */
+@media (max-width: 480px) {
+    .header-container {
+        padding: 10px 12px !important;
+    }
+    
+    .nav-link {
+        font-size: 12px !important;
+        padding: 7px 10px !important;
+        min-width: 60px;
+    }
+    
+    /* Footer más compacto */
+    .footer-container {
+        padding: 15px 12px !important;
+    }
+    
+    /* Tablas responsive */
+    table {
+        font-size: 12px !important;
+    }
+    
+    /* Botones más pequeños */
+    button {
+        font-size: 13px !important;
+        padding: 8px 12px !important;
+    }
+}
+
+/* ============================================ */
+/* COMPONENTES DASH/MANTINE RESPONSIVE */
+/* ============================================ */
+
+/* Contenedores Mantine */
+@media (max-width: 768px) {
+    .mantine-Container-root {
+        padding-left: 12px !important;
+        padding-right: 12px !important;
+    }
+    
+    .mantine-Paper-root {
+        padding: 16px !important;
+    }
+    
+    .mantine-SimpleGrid-root {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+/* Tarjetas y paneles */
+@media (max-width: 768px) {
+    [style*="padding: 40px"] {
+        padding: 20px !important;
+    }
+    
+    [style*="padding: 60px"] {
+        padding: 30px 20px !important;
+    }
+}
+
+/* Textos responsive */
+@media (max-width: 768px) {
+    h1 {
+        font-size: clamp(24px, 6vw, 36px) !important;
+    }
+    
+    h2 {
+        font-size: clamp(20px, 5vw, 28px) !important;
+    }
+    
+    h3 {
+        font-size: clamp(18px, 4vw, 22px) !important;
+    }
+    
+    p {
+        font-size: clamp(14px, 3vw, 16px) !important;
+    }
+}
+
+/* ============================================ */
+/* MAPAS RESPONSIVE (Leaflet) */
+/* ============================================ */
+
+@media (max-width: 768px) {
+    .leaflet-container {
+        height: 400px !important;
+        min-height: 300px !important;
+    }
+    
+    .leaflet-control-zoom {
+        transform: scale(1.2);
+    }
+    
+    .leaflet-popup-content {
+        font-size: 13px !important;
+    }
+}
+
+/* ============================================ */
+/* FORMULARIOS Y INPUTS RESPONSIVE */
+/* ============================================ */
+
+@media (max-width: 768px) {
+    input[type="text"],
+    input[type="number"],
+    select,
+    textarea {
+        font-size: 16px !important; /* Evita zoom en iOS */
+    }
+    
+    .mantine-Input-wrapper {
+        margin-bottom: 12px !important;
+    }
+    
+    .mantine-Button-root {
+        width: 100%;
+        margin-bottom: 8px;
+    }
+}
+
+/* ============================================ */
+/* TABLAS RESPONSIVE */
+/* ============================================ */
+
+@media (max-width: 768px) {
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    thead {
+        display: none; /* Ocultar headers en móvil para mejor UX */
+    }
+    
+    tr {
+        display: block;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 10px;
+    }
+    
+    td {
+        display: block;
+        text-align: right;
+        padding: 8px;
+        border-bottom: 1px solid #eee;
+    }
+    
+    td:before {
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+        color: #2d6a4f;
+    }
+    
+    td:last-child {
+        border-bottom: none;
+    }
+}
+
+/* ============================================ */
+/* PÁGINA ATOM (DESCARGA OFICIAL) - RESPONSIVE */
+/* ============================================ */
+
+/* Desktop - layout lado a lado */
+@media (min-width: 769px) {
+    .atom-layout-responsive {
+        display: grid !important;
+        grid-template-columns: 1fr 2fr !important;
+        gap: 20px !important;
+    }
+    
+    .atom-mapa-responsive {
+        height: 500px !important;
+    }
+}
+
+/* Tablet y móvil - layout en columna */
+@media (max-width: 768px) {
+    .atom-layout-responsive {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 15px !important;
+    }
+    
+    /* Formulario primero */
+    .atom-formulario-panel {
+        order: 1;
+    }
+    
+    /* Resultados después */
+    .atom-resultados-panel {
+        order: 2;
+    }
+    
+    /* Mapa con altura fija en móvil */
+    .atom-mapa-container {
+        min-height: 400px !important;
+        height: 400px !important;
+    }
+    
+    .atom-mapa-responsive {
+        height: 400px !important;
+    }
+    
+    /* Stats cards responsive */
+    .atom-stats-grid {
+        grid-template-columns: 1fr 1fr 1fr !important;
+        gap: 8px !important;
+    }
+    
+    /* Botones de descarga */
+    .atom-botones-descarga {
+        flex-direction: column !important;
+        gap: 8px !important;
+    }
+    
+    .atom-botones-descarga button {
+        width: 100% !important;
+    }
+}
+
+/* Móvil muy pequeño */
+@media (max-width: 480px) {
+    .atom-mapa-container {
+        min-height: 350px !important;
+        height: 350px !important;
+    }
+    
+    .atom-mapa-responsive {
+        height: 350px !important;
+    }
+    
+    /* Stats cards en columna en móvil pequeño */
+    .atom-stats-grid {
+        grid-template-columns: 1fr !important;
+        gap: 8px !important;
+    }
+    
+    /* Formulario más compacto */
+    .atom-formulario-panel {
+        padding: 12px !important;
+    }
+    
+    /* Selects y inputs más compactos */
+    .atom-formulario-panel .mantine-Select-root,
+    .atom-formulario-panel .mantine-NumberInput-root,
+    .atom-formulario-panel .mantine-MultiSelect-root {
+        margin-bottom: 12px !important;
+    }
+}
+
+/* ============================================ */
+/* PÁGINA BBOX (ÁREA EN MAPA) - RESPONSIVE */
+/* ============================================ */
+
+/* Desktop - layout lado a lado */
+@media (min-width: 769px) {
+    .bbox-layout-responsive {
+        display: grid !important;
+        grid-template-columns: 1fr 2fr !important;
+        gap: 20px !important;
+    }
+    
+    .bbox-controles-panel {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .bbox-mapa-responsive {
+        height: 600px !important;
+    }
+}
+
+/* Tablet y móvil - layout reorganizado */
+@media (max-width: 768px) {
+    .bbox-layout-responsive {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 15px !important;
+    }
+    
+    /* Orden en móvil: Paso 1 → Mapa → Paso 2 → Paso 3 */
+    .bbox-paso-1 {
+        order: 1;
+    }
+    
+    .bbox-mapa-panel {
+        order: 2;
+    }
+    
+    .bbox-paso-2 {
+        order: 3;
+    }
+    
+    .bbox-paso-3 {
+        order: 4;
+    }
+    
+    /* Mapa con altura fija en móvil */
+    .bbox-mapa-responsive {
+        height: 450px !important;
+        min-height: 450px !important;
+    }
+    
+    /* Botones de descarga en columna */
+    .bbox-botones-descarga {
+        flex-direction: column !important;
+        gap: 8px !important;
+    }
+    
+    .bbox-botones-descarga button {
+        width: 100% !important;
+    }
+}
+
+/* Móvil muy pequeño */
+@media (max-width: 480px) {
+    .bbox-mapa-responsive {
+        height: 400px !important;
+        min-height: 400px !important;
+    }
+    
+    /* Papers más compactos */
+    .bbox-paso-1,
+    .bbox-paso-2,
+    .bbox-paso-3 {
+        padding: 12px !important;
+    }
+    
+    /* Títulos de pasos más pequeños */
+    .bbox-paso-1 h3,
+    .bbox-paso-2 h3,
+    .bbox-paso-3 h3 {
+        font-size: 16px !important;
+        margin-bottom: 8px !important;
+    }
+}
+
+/* Ajustes para los controles de dibujo de Leaflet en móvil */
+@media (max-width: 768px) {
+    .leaflet-draw-toolbar {
+        margin-top: 10px !important;
+    }
+    
+    .leaflet-draw-toolbar a {
+        width: 36px !important;
+        height: 36px !important;
+    }
+}
+
+/* ============================================ */
+/* PÁGINA DE CÓDIGOS SIGPAC - RESPONSIVE */
+/* ============================================ */
+
+/* Desktop - layout lado a lado */
+@media (min-width: 769px) {
+    .responsive-grid-layout {
+        display: grid !important;
+        grid-template-columns: 1fr 2fr !important;
+        gap: 20px !important;
+    }
+    
+    .textarea-codigos textarea {
+        min-height: 250px !important;
+    }
+    
+    .mapa-container {
+        min-height: 500px !important;
+    }
+}
+
+/* Tablet y móvil - layout en columna */
+@media (max-width: 768px) {
+    .responsive-grid-layout {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 15px !important;
+    }
+    
+    /* Formulario más compacto en móvil */
+    .formulario-panel {
+        order: 1;
+    }
+    
+    .textarea-codigos textarea {
+        min-height: 120px !important;
+        max-height: 150px !important;
+        font-size: 14px !important;
+    }
+    
+    /* Resultados aparecen debajo */
+    .resultados-panel {
+        order: 2;
+    }
+    
+    /* Mapa con altura fija en móvil para que siempre se vea */
+    .mapa-container {
+        min-height: 400px !important;
+        height: 400px !important;
+    }
+    
+    .leaflet-map-responsive {
+        height: 400px !important;
+    }
+    
+    /* Stats cards en una sola columna en móvil muy pequeño */
+    .stats-grid-responsive {
+        grid-template-columns: 1fr 1fr 1fr !important;
+        gap: 8px !important;
+    }
+}
+
+/* Móvil muy pequeño */
+@media (max-width: 480px) {
+    .textarea-codigos textarea {
+        min-height: 100px !important;
+        max-height: 120px !important;
+        font-size: 13px !important;
+    }
+    
+    .mapa-container {
+        min-height: 350px !important;
+        height: 350px !important;
+    }
+    
+    .leaflet-map-responsive {
+        height: 350px !important;
+    }
+    
+    /* Stats cards en columna en pantallas muy pequeñas */
+    .stats-grid-responsive {
+        grid-template-columns: 1fr !important;
+        gap: 8px !important;
+    }
+    
+    /* Botones de descarga en columna */
+    .botones-descarga-responsive .mantine-Group-root {
+        flex-direction: column !important;
+        width: 100%;
+    }
+    
+    .botones-descarga-responsive button {
+        width: 100% !important;
+    }
+}
+
+/* Ajustes específicos para el textarea */
+.textarea-codigos {
+    width: 100%;
+}
+
+.textarea-codigos textarea {
+    font-family: 'Courier New', monospace !important;
+    line-height: 1.4 !important;
+    overflow-y: auto !important;
+}
+
+/* Botones de ejemplo y limpiar responsive */
+@media (max-width: 480px) {
+    .button-group-responsive {
+        justify-content: space-between !important;
+        width: 100%;
+    }
+    
+    .button-group-responsive button {
+        flex: 1;
+    }
+}
+
+/* ============================================ */
+/* UTILIDADES RESPONSIVE */
+/* ============================================ */
+
+/* Ocultar en móvil */
+@media (max-width: 768px) {
+    .hide-mobile {
+        display: none !important;
+    }
+}
+
+/* Ocultar en desktop */
+@media (min-width: 769px) {
+    .hide-desktop {
+        display: none !important;
+    }
+}
+
+/* Flex responsive */
+.flex-responsive {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+@media (max-width: 768px) {
+    .flex-responsive {
+        flex-direction: column;
+    }
+}
+
+/* Grid auto-responsive */
+.grid-responsive {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 16px;
+}
+
+@media (max-width: 768px) {
+    .grid-responsive {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+}
+
+/* ============================================ */
+/* MEJORAS DE ACCESIBILIDAD TOUCH */
+/* ============================================ */
+
+@media (max-width: 768px) {
+    /* Áreas táctiles más grandes */
+    button,
+    a,
+    input[type="submit"],
+    input[type="button"] {
+        min-height: 44px; /* Tamaño mínimo recomendado por Apple/Google */
+        min-width: 44px;
+    }
+    
+    /* Scroll suave */
+    html {
+        scroll-behavior: smooth;
+    }
+    
+    /* Evitar selección accidental de texto */
+    .nav-link,
+    .logo-link {
+        -webkit-tap-highlight-color: rgba(255, 255, 255, 0.1);
+        user-select: none;
+    }
+}
+
+/* ============================================ */
+/* ANIMACIONES Y TRANSICIONES RESPONSIVE */
+/* ============================================ */
+
+/* Reducir animaciones en móvil para mejor rendimiento */
+@media (max-width: 768px) and (prefers-reduced-motion: no-preference) {
+    * {
+        animation-duration: 0.3s !important;
+        transition-duration: 0.2s !important;
+    }
+}
+
+/* Desactivar animaciones si el usuario lo prefiere */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+/* ============================================ */
+/* IMPRESIÓN (BONUS) */
+/* ============================================ */
+
+@media print {
+    .header-container,
+    .footer-container,
+    .nav-container {
+        display: none !important;
+    }
+    
+    .main-container {
+        padding: 0 !important;
+        max-width: 100% !important;
+    }
 }
